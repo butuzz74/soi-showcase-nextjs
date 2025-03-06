@@ -1,0 +1,55 @@
+{
+    "nav": {
+      "Проектора": [      
+        "Лазерные",
+        "Ламповые",
+        "4K UHD",
+        "Инсталяционные",
+        "Домашние кинотеатры",
+        "Посмотреть все"
+      ],
+      "Экраны": [
+        "Ручные",
+        "С электроприводом",
+        "Мобильные",
+        "Натяжные",
+        "Посмотреть все"
+      ],
+      "Проффесиональные дисплеи": [
+        "Интерактивные панели",
+        "Для Signage Digital",
+        "Для видеостен",
+        "Посмотреть все"
+      ],
+      "Поддержка": [
+        "Гарантийная информация",
+        "ПО и приложения",
+        "Свяжитесь с нами"
+      ],
+      "О компании": ["Наши контакты", "Как нас найти"]
+    },
+    "Проектора": [    
+      "/projectors/laser",
+      "/projectors/lamp",
+      "/projectors/uhd",
+      "/projectors/installation",
+      "/projectors/homeCinema",
+      "/projectors"
+    ],
+    "Экраны": [
+      "/fscreens/handle",
+      "/fscreens/electro",
+      "/fscreens/mob",
+      "/fscreens/tension",
+      "/fscreens/all"
+    ],
+    "Проффесиональные дисплеи": [
+      "/profdisplays/interactive",
+      "/profdisplays/signage",
+      "/profdisplays/videowall",
+      "/profdisplays/all"
+    ],
+    "Поддержка": ["/support/guarantee", "/support/sofrware", "/support/contact"],
+    "О компании": ["/about/uscontact", "/about/usfound"]
+  }
+  
