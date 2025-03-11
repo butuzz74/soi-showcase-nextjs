@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { ButtonProps } from '@/type/types';
+import { ButtonProps } from '../type/types';
 
 const NavigationButton = ({
   text,

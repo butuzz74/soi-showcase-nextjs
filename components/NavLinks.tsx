@@ -1,11 +1,11 @@
 'use client';
-import DropDownListForNavLinks from '@/uiComponents/DropDownListForNavLinks';
-import LinkForNavLinks from '@/uiComponents/LinkForNavLinks';
+import DropDownListForNavLinks from '../uiComponents/DropDownListForNavLinks';
+import LinkForNavLinks from '../uiComponents/LinkForNavLinks';
 import { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
-import config from '@/config/config.json';
-import { NavLinksProp } from '@/type/types';
-import configLinks from '@/config/configLink.json';
+import config from '../config/config.json';
+import { NavLinksProp } from '../type/types';
+import configLinks from '../config/configLink.json';
 
 function NavLinks() {
   const [activeSection, setActiveSection] = useState<string | null>(null);

@@ -1,5 +1,5 @@
 import { FaTelegram, FaFacebook, FaYoutube } from 'react-icons/fa6';
-import IconForSocial from '@/uiComponents/IconForSocial';
+import IconForSocial from '../uiComponents/IconForSocial';
 
 function NavBarForSocial() {
   return (
