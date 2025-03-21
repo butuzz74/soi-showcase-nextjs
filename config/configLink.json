@@ -5,20 +5,23 @@
       "/projectors/uhd",
       "/projectors/installation",
       "/projectors/homeCinema",
-      "/projectors"
+      "/projectors",
+      "/add/projector"
     ],
     "Экраны": [
       "/fscreens/handle",
       "/fscreens/electro",
       "/fscreens/mob",
       "/fscreens/tension",
-      "/fscreens/all"
+      "/fscreens/all",
+      "/add/screen"
     ],
     "Проффесиональные дисплеи": [
       "/profdisplays/interactive",
       "/profdisplays/signage",
       "/profdisplays/videowall",
-      "/profdisplays/all"
+      "/profdisplays/all",
+      "/add/display"
     ],
     "Поддержка": ["/support/guarantee", "/support/sofrware", "/support/contact"],
     "О компании": ["/about/uscontact", "/about/usfound"]

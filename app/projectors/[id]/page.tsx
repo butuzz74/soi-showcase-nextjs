@@ -2,6 +2,7 @@ import NavigationButton from '../../../components/Button';
 import ProjectorCardOne from '../../../components/ProjectorCardOne';
 import { ProjectorType } from '../../../type/types';
 import { Metadata } from 'next';
+import {auth} from "../../../config/auth";
 
 export async function generateMetadata({
   params,
@@ -28,12 +29,13 @@ export async function generateMetadata({
 }
 
 async function ProjectorPage({ params }: { params: Promise<{ id: string }> }) {
+  const session = await auth();  
   const {id} = await params;
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/projector/${id}`,
     { cache: 'no-store' }
   );
-  const projector: ProjectorType = await data.json();
+  const projector: ProjectorType = await data.json();  
 
   return (
     <div className="mx-auto flex h-full max-w-sm flex-col justify-between rounded-lg border border-gray-200 bg-white shadow-lg">
@@ -47,6 +49,7 @@ async function ProjectorPage({ params }: { params: Promise<{ id: string }> }) {
         access={projector?.access!}
         description={projector?.description!}
       />
+      {session? <NavigationButton text="Редактировать" back={true}/> : null}
       <NavigationButton text="Назад" back={true} />
     </div>
   );
