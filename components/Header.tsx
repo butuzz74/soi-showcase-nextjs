@@ -1,5 +1,5 @@
 function Header() {
-  return <div>СИСТЕМЫ ОТОБРАЖЕНИЯ ИНФОРМАЦИИ</div>;
+  return <div className="flex justify-center">СИСТЕМЫ ОТОБРАЖЕНИЯ ИНФОРМАЦИИ</div>;
 }
 
 export default Header;

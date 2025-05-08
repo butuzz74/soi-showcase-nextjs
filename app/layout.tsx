@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import ContactBar from '../components/ContactBar';
+import NavBarMainPage from '../components/NavBarMainPage';
+import Providers from '../components/Providers';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -29,14 +32,21 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} grid min-h-screen grid-rows-[auto_1fr_auto] antialiased`}
       >
-        <header className="flex items-center justify-center bg-gray-800 p-4 text-white">
-          <Header />
-        </header>
-        <main className="bg-gray-100 p-4">{children}</main>
-        <h1 className="text-black">kjlkjlkj</h1>
-        <footer className="bg-gray-800 p-4 text-white">
-          <Footer />
-        </footer>
+        <Providers>
+          <header className="fixed top-0 left-0 z-50 grid w-full grid-rows-[20px_20px_auto] bg-gray-800 p-4 text-white">
+            <Header />
+            <div className="mt-4 w-full bg-white"></div>
+            <div className="grid grid-rows-[auto_20px_auto]">
+              <ContactBar />
+              <div className="mt-4 w-full bg-white"></div>
+              <NavBarMainPage />
+            </div>
+          </header>
+          <main className="bg-gray-100 p-4 pt-40">{children}</main>
+          <footer className="bg-gray-800 p-4 text-white">
+            <Footer />
+          </footer>
+        </Providers>
       </body>
     </html>
   );

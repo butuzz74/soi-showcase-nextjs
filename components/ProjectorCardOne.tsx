@@ -12,7 +12,7 @@ const ProjectorCard: React.FC<ProjectorCardProps> = ({
   brand,
 }) => {
   return (
-    <div className="mx-auto flex h-full max-w-sm flex-col justify-between rounded-lg border border-gray-200 bg-white shadow-lg">
+    <div className="mx-auto flex h-full w-full flex-col justify-between rounded-lg border border-gray-200 bg-white shadow-lg">
       <Image
         src={image}
         alt="model"

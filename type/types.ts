@@ -6,7 +6,7 @@ export type ProjectorCardProps = {
   brand: string;
   type: string;
   model: string;
-  price: string;
+  price: number;
   description: string;
   image: string;
   access: boolean;
@@ -24,10 +24,10 @@ export type ProjectorType = {
   brand: string;
   type: string;
   model: string;
-  price: string;
+  price: number;
   description: string;
   image: string;
-  brightness: string;
+  brightness: number;
   access: boolean;
 };
 
@@ -41,10 +41,50 @@ export type AdminType = {
 export type FieldConfigForFormProduct = {
   name: string;
   label: string;
-  type: 'text' | 'textarea' | 'number' | 'file' | 'checkbox';
+  type: 'text' | 'textarea' | 'number' | 'file' | 'checkbox' | "select";
+  options?: string[]
 };
 
 export type ServerAction = {
   action: (data: FormData) => Promise<void>;
   data: FieldConfigForFormProduct[];
 };
+
+export type ConfigForProductMainPage = {
+  title: string;
+  image: string;
+  linkForTransition: string;
+};
+
+export type HomeLinkType = {
+  title: string;
+  icon: React.ReactNode;
+  link: string
+}
+
+export type LinkForCatalogType = {
+  name: string
+  linkForTransition: string
+}
+export type CatalogType = {
+  data? : LinkForCatalogType[]
+} & HomeLinkType
+
+
+export type BreadCumsType = {
+  [key: string]: string;
+}
+
+export type ProjectorsBlockType = {
+  projectors: ProjectorType[];
+  totalPages: number;
+  currentPage: number;
+  totalProjectors: number;
+  brandInfo: BrandInfoType[];
+}
+
+export type BrandInfoType = {
+  brand: string;
+  descriptionTop: string;
+  descriptionBottom: string;
+}

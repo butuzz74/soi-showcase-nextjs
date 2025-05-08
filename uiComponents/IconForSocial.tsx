@@ -6,7 +6,7 @@ function IconForSocial({
   href: string;
 }) {
   return (
-    <a href={`${href}`} target="_blank" rel="noopener noreferrer">
+    <a href={`${href}`} target="_blank" rel="noopener noreferrer" className="flex items-center">
       {children}
     </a>
   );

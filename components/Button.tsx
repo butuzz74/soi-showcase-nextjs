@@ -24,9 +24,9 @@ const NavigationButton = ({
     <button
       onClick={handleClick}
       // prettier-ignore
-      className={`rounded bg-gray-800 px-4 py-2
+      className={`rounded bg-gray-800 px-4 py-2 hover:cursor-pointer
                  text-white hover:bg-gray-600 focus:outline-none
-                 focus:ring-2 focus:ring-blue-300`}
+                 focus:ring-2 focus:ring-blue-300 my-2 mx-2 max-w-sm`}
     >
       {text}
     </button>

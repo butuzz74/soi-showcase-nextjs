@@ -4,11 +4,11 @@ export interface IProjector extends Omit<Document, 'model'> {
   brand: string;
   type: string;
   model: string;
-  price: string;
+  price: number;
   description: string;
   image: string;
-  brightness: string;
-  access: string;
+  brightness: number;
+  access: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -18,11 +18,11 @@ const ProjectorSchema = new Schema<IProjector>(
     brand: { type: String },
     type: { type: String},
     model: { type: Schema.Types.String },
-    price: { type: String },
+    price: { type: Number },
     description: { type: String },
     image: { type: String },
-    brightness: { type: String },
-    access: { type: String },
+    brightness: { type: Number },
+    access: {type: Boolean, default: true },
   },
   {
     timestamps: true, 

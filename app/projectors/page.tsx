@@ -1,34 +1,63 @@
 import { Metadata } from 'next';
-import ProjectorCard from '../../components/ProjectorCard';
-import { ProjectorType } from '../../type/types';
+import ProjectorsMainPage from '../../components/projectors/ProjectorsMainPage';
 
+type Props = {
+  searchParams: Promise<{
+    page?: string;
+    perPage?: '6' | '12' | '24';
+    layout?: 'grid' | 'list';
+    sort?: 'price-asc' | 'price-desc' | 'newest';
+    keyword?: string;
+    priceFrom?: string;
+    priceTo?: string;
+    access?: boolean;
+    onSale?: boolean;
+    brand?: string;
+    type?: string;
+    brightness?: string;
+  }>;
+};
+
+type SearchParams = Promise<{ page?: string }>;
 export const metadata: Metadata = {
   title: 'SOI-Projectors',
 };
 
-async function ProjectorsAll() {
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/projector`,
-    { cache: 'no-store' }
-  );
-  const projectors: ProjectorType[] = await data.json();
+async function ProjectorsAll({ searchParams }: Props) {
+  const {
+    page,
+    perPage,
+    layout,
+    sort,
+    brand,
+    type,
+    access,
+    priceFrom,
+    priceTo,
+  } = await searchParams;
+
+  const currentPage = parseInt(page || '1');
+  const currentperPage = parseInt(perPage || '6');
+  const currentLayout = layout || 'grid';
+  const currentSort = sort || 'price-asc';
+  const currentBrand = brand || '';
+  const currentType = type || '';
+  const currentAccess = access || false;
+  const currentPriceFrom = priceFrom || '0';
+  const currentPriceTo = priceTo || '0';
 
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {projectors.map((projector) => (
-        <ProjectorCard
-          key={projector._id}
-          id={projector._id}
-          image={projector.image}
-          price={projector.price}
-          model={projector.model}
-          type={projector.type}
-          brand={projector.brand}
-          access={projector.access}
-          description={projector.description}
-        />
-      ))}
-    </div>
+    <ProjectorsMainPage
+      currentPage={currentPage}
+      currentperPage={currentperPage}
+      currentLayout={currentLayout}
+      currentSort={currentSort}
+      currentBrand={currentBrand}
+      currentType={currentType}
+      currentAccess={currentAccess}
+      currentPriceFrom={currentPriceFrom}
+      currentPriceTo={currentPriceTo}
+    />
   );
 }
 
