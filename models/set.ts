@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-export interface IScreen {
+export interface ISet {
     brand: string;
     type: string;
     model: string;
@@ -10,7 +10,7 @@ export interface IScreen {
     access: boolean;    
 }
 
-const ScreenSchema = new Schema<IScreen>(
+const SetSchema = new Schema<ISet>(
   {
     brand: { type: String },
     type: { type: String},
@@ -22,9 +22,9 @@ const ScreenSchema = new Schema<IScreen>(
   },
   {
     timestamps: true,
-    collection: 'screens',
+    collection: 'sets',
   }
 );
 
-export default mongoose.models.Screen ||
-  mongoose.model<IScreen>('Screen', ScreenSchema);
+export default mongoose.models.Set ||
+  mongoose.model<ISet>('Set', SetSchema);

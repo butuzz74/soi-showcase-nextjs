@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { configForDisplaysPage } from '../../config/configForProjectorsPage';
 import CardForChoiceBrand from '../projectors/CardForChoiceBrand';
-import ProjectorsBlock from '../projectors/ProjectorsBlock';
+import DisplaysBlock from '../displays/DisplaysBlock';
 import { ProjectorsBlockType } from '../../type/types';
 import Breadcrumbs from '../../uiComponents/Breadcums';
 import { configBreadcumsDisplays } from '../../config/configForBreadcums';
@@ -19,7 +19,7 @@ async function DisplaysMainPage({
   currentType,
   currentAccess,
   currentPriceFrom,
-  currentPriceTo
+  currentPriceTo,
 }: {
   currentPage: number;
   currentperPage: number;
@@ -29,14 +29,14 @@ async function DisplaysMainPage({
   currentType: string;
   currentAccess: boolean;
   currentPriceFrom: string;
-  currentPriceTo: string
+  currentPriceTo: string;
 }) {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/display?page=${currentPage}&perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&brand=${currentBrand}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`,
     { cache: 'no-store' }
   );
   const projectors: ProjectorsBlockType = await data.json();
-  const queryParams = `perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&brand=${currentBrand}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`   
+  const queryParams = `perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&brand=${currentBrand}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`;
 
   return (
     <div className="mt-10 text-black">
@@ -87,7 +87,7 @@ async function DisplaysMainPage({
           <div>
             <SortingBar />
             {projectors.projectors.length !== 0 ? (
-              <ProjectorsBlock
+              <DisplaysBlock
                 projectors={projectors.projectors}
                 layout={currentLayout}
               />
@@ -107,6 +107,7 @@ async function DisplaysMainPage({
             totalProduct={projectors.totalProjectors}
             queryParams={queryParams}
             currentperPage={currentperPage}
+            currentProduct={'displays'}
           />
           <div>
             <p>
@@ -116,10 +117,10 @@ async function DisplaysMainPage({
               помочь вам выбрать подходящую модель: Определите ваш бюджет:
               Мониторы доступны в различных ценовых категориях, от бюджетных до
               премиум. Определите, сколько вы готовы потратить на приобретение
-              монитора. Определите основные потребности: Подумайте, для чего
-              вам нужен монитор. Например, вы планируете использовать его для
-              домашнего использования, презентаций в офисе, образовательных целей
-              или для игр. Это поможет сузить выбор до определенных типов
+              монитора. Определите основные потребности: Подумайте, для чего вам
+              нужен монитор. Например, вы планируете использовать его для
+              домашнего использования, презентаций в офисе, образовательных
+              целей или для игр. Это поможет сузить выбор до определенных типов
               мониторов. Рассмотрите технические характеристики: Обратите
               внимание на такие параметры, как разрешение изображения (обычно
               указывается в формате ширина x высота, например, 1920 x 1080 для

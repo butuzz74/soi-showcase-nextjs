@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-export interface IScreen {
+export interface ICommutation {
     brand: string;
     type: string;
     model: string;
@@ -10,7 +10,7 @@ export interface IScreen {
     access: boolean;    
 }
 
-const ScreenSchema = new Schema<IScreen>(
+const CommutationSchema = new Schema<ICommutation>(
   {
     brand: { type: String },
     type: { type: String},
@@ -22,9 +22,11 @@ const ScreenSchema = new Schema<IScreen>(
   },
   {
     timestamps: true,
-    collection: 'screens',
+    collection: 'commutations',
   }
 );
 
-export default mongoose.models.Screen ||
-  mongoose.model<IScreen>('Screen', ScreenSchema);
+export default mongoose.models.Commutation ||
+  mongoose.model<ICommutation>('Commutation', CommutationSchema);
+
+

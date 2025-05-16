@@ -1,5 +1,5 @@
 import { connectDB } from '../../../../lib/mongodb';
-import Display from '../../../../models/display';
+import Set from '../../../../models/set';
 import { NextResponse } from 'next/server';
 
 export async function GET(
@@ -9,16 +9,16 @@ export async function GET(
   try {
     await connectDB();    
     const { id } = await params;    
-    const display = await Display.findById(id).select(
+    const set = await Set.findById(id).select(
       '-__v -createdAt -updated'
     );
-    if (!display) {
+    if (!set) {
       return NextResponse.json(
-        { message: 'Дисплей не найден' },
+        { message: 'Комплект не найден' },
         { status: 404 }
       );
     }
-    return NextResponse.json(display);
+    return NextResponse.json(set);
   } catch (error) {
     return NextResponse.json({ message: 'Ошибка сервера' }, { status: 500 });
   }

@@ -17,7 +17,7 @@ export const productConfigForMainPage: ConfigForProductMainPage[] = [
     title: 'Кронштейны и крепления',
     image:
       'https://ik.imagekit.io/dku5gkauv/brackets/BracketForMainPage2.jpg?updatedAt=1743169226202',
-    linkForTransition: '/projectors',
+    linkForTransition: '/brackets',
   },
   {
     title: 'Мониторы и панели',
@@ -29,12 +29,12 @@ export const productConfigForMainPage: ConfigForProductMainPage[] = [
     title: 'Готовые решения',
     image:
       'https://ik.imagekit.io/dku5gkauv/readySolutions/ReadySolutionForMainPage.jfif?updatedAt=1743167937855',
-    linkForTransition: '/projectors',
+    linkForTransition: '/sets',
   },
   {
     title: 'AV-коммутация',
     image:
       'https://ik.imagekit.io/dku5gkauv/AVCommutation/AVComForMainPage.jfif?updatedAt=1743167994451',
-    linkForTransition: '/projectors',
+    linkForTransition: '/commutations',
   },
 ];

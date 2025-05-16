@@ -1,5 +1,5 @@
 import { connectDB } from '../../../../lib/mongodb';
-import Display from '../../../../models/display';
+import Bracket from '../../../../models/bracket';
 import { NextResponse } from 'next/server';
 
 export async function GET(
@@ -9,16 +9,16 @@ export async function GET(
   try {
     await connectDB();    
     const { id } = await params;    
-    const display = await Display.findById(id).select(
+    const bracket = await Bracket.findById(id).select(
       '-__v -createdAt -updated'
     );
-    if (!display) {
+    if (!bracket) {
       return NextResponse.json(
-        { message: 'Дисплей не найден' },
+        { message: 'Кронштейн не найден' },
         { status: 404 }
       );
     }
-    return NextResponse.json(display);
+    return NextResponse.json(bracket);
   } catch (error) {
     return NextResponse.json({ message: 'Ошибка сервера' }, { status: 500 });
   }

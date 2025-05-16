@@ -6,8 +6,7 @@ export interface IBracket {
     model: string;
     price: number;
     description: string;
-    image: string;
-    brightness: number;
+    image: string;    
     access: boolean;    
 }
 
@@ -18,8 +17,7 @@ const BracketSchema = new Schema<IBracket>(
     model: { type: String },
     price: { type: Number },
     description: { type: String },
-    image: { type: String },
-    brightness: { type: Number },
+    image: { type: String },    
     access: {type: Boolean, default: true },
   },
   {

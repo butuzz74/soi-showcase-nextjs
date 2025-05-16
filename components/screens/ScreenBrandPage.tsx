@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import ProjectorsBlock from './ProjectorsBlock';
+import ScreensBlock from './ScreensBlock';
 import { ProjectorsBlockType } from '../../type/types';
 import Breadcrumbs from '../../uiComponents/Breadcums';
-import { configBreadcums } from '../../config/configForBreadcums';
+import { configBreadcumsScreens } from '../../config/configForBreadcums';
 import Pagination from '../../uiComponents/Pagination';
 import SortingBar from '../SortingBar';
 import SortingSideBar from '../../uiComponents/SortingSideBar';
@@ -10,7 +10,7 @@ import NoticeBlock from '../../uiComponents/NoticeBlock';
 import Markdown from 'react-markdown';
 import ButtonAddProduct from '../../uiComponents/ButtonAddProduct';
 
-async function ProjectorBrandPage({
+async function ScreenBrandPage({
   currentPage,
   currentperPage,
   currentLayout,
@@ -32,7 +32,7 @@ async function ProjectorBrandPage({
   currentBrand: string;
 }) {
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/projector/brand/${currentBrand}?page=${currentPage}&perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/screen/brand/${currentBrand}?page=${currentPage}&perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`,
     { cache: 'no-store' }
   );
   const projectors: ProjectorsBlockType = await data.json();
@@ -41,22 +41,22 @@ async function ProjectorBrandPage({
   return (
     <div className="mt-10 text-black">
       <div className="flex justify-between">
-        <Breadcrumbs data={configBreadcums} />
+        <Breadcrumbs data={configBreadcumsScreens} />
         <ButtonAddProduct path="/add/projector">
-          Добавить проектор
+          Добавить экран
         </ButtonAddProduct>
       </div>
       <div className="flex">
         <Image
           src={
-            'https://ik.imagekit.io/dku5gkauv/projectors/1714141638557-optoma-ZU860.jpg?updatedAt=1739909394002'
+            'https://ik.imagekit.io/dku5gkauv/progectorScreen/ScreenForMainPage.jpg?updatedAt=1743167693462'
           }
           alt="image"
           width={200}
           height={200}
         />
         <div className="prose ml-4 flex flex-col">
-          <h1>Проекторы {currentBrand}</h1>
+          <h1>Проекционные экраны {currentBrand}</h1>
           {projectors.brandInfo[0].descriptionTop && (
             <Markdown>
               {projectors.brandInfo[0].descriptionTop.replace(/\\n/g, '\n')}
@@ -75,7 +75,7 @@ async function ProjectorBrandPage({
           <div>
             <SortingBar />
             {projectors.projectors.length !== 0 ? (
-              <ProjectorsBlock
+              <ScreensBlock
                 projectors={projectors.projectors}
                 layout={currentLayout}
               />
@@ -95,7 +95,7 @@ async function ProjectorBrandPage({
             totalProduct={projectors.totalProjectors}
             queryParams={queryParams}
             currentperPage={currentperPage}
-            currentProduct={"projectors"}
+            currentProduct={"screens"}
           />
           <div className="prose">
             {projectors.brandInfo[0].descriptionBottom && (
@@ -113,4 +113,4 @@ async function ProjectorBrandPage({
   );
 }
 
-export default ProjectorBrandPage;
+export default ScreenBrandPage;

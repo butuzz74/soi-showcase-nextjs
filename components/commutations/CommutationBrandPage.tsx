@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import ProjectorsBlock from './ProjectorsBlock';
+import CommutationsBlock from './CommutationsBlock';
 import { ProjectorsBlockType } from '../../type/types';
 import Breadcrumbs from '../../uiComponents/Breadcums';
-import { configBreadcums } from '../../config/configForBreadcums';
+import { configBreadcumsCommutations } from '../../config/configForBreadcums';
 import Pagination from '../../uiComponents/Pagination';
 import SortingBar from '../SortingBar';
 import SortingSideBar from '../../uiComponents/SortingSideBar';
@@ -10,7 +10,7 @@ import NoticeBlock from '../../uiComponents/NoticeBlock';
 import Markdown from 'react-markdown';
 import ButtonAddProduct from '../../uiComponents/ButtonAddProduct';
 
-async function ProjectorBrandPage({
+async function CommutationBrandPage({
   currentPage,
   currentperPage,
   currentLayout,
@@ -32,7 +32,7 @@ async function ProjectorBrandPage({
   currentBrand: string;
 }) {
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/projector/brand/${currentBrand}?page=${currentPage}&perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/commutation/brand/${currentBrand}?page=${currentPage}&perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`,
     { cache: 'no-store' }
   );
   const projectors: ProjectorsBlockType = await data.json();
@@ -41,22 +41,22 @@ async function ProjectorBrandPage({
   return (
     <div className="mt-10 text-black">
       <div className="flex justify-between">
-        <Breadcrumbs data={configBreadcums} />
+        <Breadcrumbs data={configBreadcumsCommutations} />
         <ButtonAddProduct path="/add/projector">
-          Добавить проектор
+          Добавить оборудование
         </ButtonAddProduct>
       </div>
       <div className="flex">
         <Image
           src={
-            'https://ik.imagekit.io/dku5gkauv/projectors/1714141638557-optoma-ZU860.jpg?updatedAt=1739909394002'
+            'https://ik.imagekit.io/dku5gkauv/AVCommutation/AVComForMainPage.jfif?updatedAt=1743167994451'
           }
           alt="image"
           width={200}
           height={200}
         />
         <div className="prose ml-4 flex flex-col">
-          <h1>Проекторы {currentBrand}</h1>
+          <h1>Коммутационное оборудование {currentBrand}</h1>
           {projectors.brandInfo[0].descriptionTop && (
             <Markdown>
               {projectors.brandInfo[0].descriptionTop.replace(/\\n/g, '\n')}
@@ -75,7 +75,7 @@ async function ProjectorBrandPage({
           <div>
             <SortingBar />
             {projectors.projectors.length !== 0 ? (
-              <ProjectorsBlock
+              <CommutationsBlock
                 projectors={projectors.projectors}
                 layout={currentLayout}
               />
@@ -95,7 +95,7 @@ async function ProjectorBrandPage({
             totalProduct={projectors.totalProjectors}
             queryParams={queryParams}
             currentperPage={currentperPage}
-            currentProduct={"projectors"}
+            currentProduct={'commutations'}
           />
           <div className="prose">
             {projectors.brandInfo[0].descriptionBottom && (
@@ -113,4 +113,4 @@ async function ProjectorBrandPage({
   );
 }
 
-export default ProjectorBrandPage;
+export default CommutationBrandPage;

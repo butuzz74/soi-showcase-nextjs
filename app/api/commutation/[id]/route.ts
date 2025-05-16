@@ -1,5 +1,5 @@
 import { connectDB } from '../../../../lib/mongodb';
-import Display from '../../../../models/display';
+import Commutation from '../../../../models/commutation';
 import { NextResponse } from 'next/server';
 
 export async function GET(
@@ -9,17 +9,18 @@ export async function GET(
   try {
     await connectDB();    
     const { id } = await params;    
-    const display = await Display.findById(id).select(
+    const commutation = await Commutation.findById(id).select(
       '-__v -createdAt -updated'
     );
-    if (!display) {
+    if (!commutation) {
       return NextResponse.json(
-        { message: 'Дисплей не найден' },
+        { message: 'Оборудование не найдено' },
         { status: 404 }
       );
     }
-    return NextResponse.json(display);
+    return NextResponse.json(commutation);
   } catch (error) {
     return NextResponse.json({ message: 'Ошибка сервера' }, { status: 500 });
   }
 }
+

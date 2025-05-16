@@ -6,13 +6,25 @@ export const productForCatalog: CatalogType[] = [
     icon: 'https://ik.imagekit.io/dku5gkauv/projectors/1714141638557-optoma-ZU860.jpg?updatedAt=1739909394002',
     link: '/projectors',
     data: [
-      { name: 'Проекторы OPTOMA', linkForTransition: '/projectors/brand/optoma' },
-      { name: 'Проекторы INFOCUS', linkForTransition: '/projectors/brand/infocus' },
+      {
+        name: 'Проекторы OPTOMA',
+        linkForTransition: '/projectors/brand/optoma',
+      },
+      {
+        name: 'Проекторы INFOCUS',
+        linkForTransition: '/projectors/brand/infocus',
+      },
       { name: 'Проекторы LG', linkForTransition: '/projectors/brand/lg' },
-      { name: 'Проекторы SONNOC', linkForTransition: '/projectors/brand/sonnoc' },
+      {
+        name: 'Проекторы SONNOC',
+        linkForTransition: '/projectors/brand/sonnoc',
+      },
       { name: 'Проекторы NEC', linkForTransition: '/projectors/brand/nec' },
       { name: 'Проекторы ABIRA', linkForTransition: '/projectors/brand/abira' },
-      { name: 'Проекторы DIELLO', linkForTransition: '/projectors/brand/diello' },
+      {
+        name: 'Проекторы DIELLO',
+        linkForTransition: '/projectors/brand/diello',
+      },
       { name: 'Проекторы EPSON', linkForTransition: '/projectors/brand/epson' },
       { name: 'Аксессуары для проектора', linkForTransition: '/' },
     ],
@@ -20,25 +32,18 @@ export const productForCatalog: CatalogType[] = [
   {
     title: 'Экраны для проекторов',
     icon: 'https://ik.imagekit.io/dku5gkauv/progectorScreen/ScreenForMainPage.jpg?updatedAt=1743167693462',
-    link: '/projectors',
+    link: '/screens',
     data: [
-      { name: 'Настенно-потолочные', linkForTransition: '/' },
-      { name: 'Для домашнего кинотеатра', linkForTransition: '/' },
-      { name: 'Мобильный на штативе (треноге)', linkForTransition: '/' },
-      { name: 'Встраиваемый в потолок', linkForTransition: '/' },
-      { name: 'Напольный', linkForTransition: '/' },
-      { name: 'Натяжной на раме', linkForTransition: '/' },
+      { name: 'Экраны Lumien', linkForTransition: '/screens/brand/lumien' },
+      { name: 'Экраны Projecta', linkForTransition: '/screens/brand/projecta' },
     ],
   },
   {
     title: 'Кронштейны и крепления',
     icon: 'https://ik.imagekit.io/dku5gkauv/brackets/BracketForMainPage2.jpg?updatedAt=1743169226202',
-    link: '/projectors',
+    link: '/brackets',
     data: [
-      { name: 'Кронштейн (крепление) для проектора', linkForTransition: '/' },
-      { name: 'Крепление для видеостен', linkForTransition: '/' },
-      { name: 'Мобильные стойки для панелей', linkForTransition: '/' },
-      { name: 'Крепление (кроештейн) для панелей', linkForTransition: '/' },      
+      { name: 'Кронштейны Wize', linkForTransition: '/brackets/brand/wize' },
     ],
   },
   {
@@ -47,17 +52,31 @@ export const productForCatalog: CatalogType[] = [
     link: '/displays',
     data: [
       { name: 'Мониторы VESTEL', linkForTransition: '/displays/brand/vestel' },
-      { name: 'Мониторы LUMIEN', linkForTransition: '/displays/brand/sharp' },      
+      { name: 'Мониторы Sharp', linkForTransition: '/displays/brand/sharp' },
     ],
   },
   {
     title: 'Готовые решения',
     icon: 'https://ik.imagekit.io/dku5gkauv/readySolutions/ReadySolutionForMainPage.jfif?updatedAt=1743167937855',
-    link: '/projectors',
+    link: '/sets',
   },
   {
     title: 'AV-коммутация',
     icon: 'https://ik.imagekit.io/dku5gkauv/AVCommutation/AVComForMainPage.jfif?updatedAt=1743167994451',
-    link: '/projectors',
+    link: '/commutations',
+    data: [
+      {
+        name: 'Коммутационное оборудование SCT',
+        linkForTransition: '/commutations/brand/sct',
+      },
+      {
+        name: 'Коммутационное оборудование Aten',
+        linkForTransition: '/commutations/brand/aten',
+      },
+      {
+        name: 'Коммутационное оборудование Kramer',
+        linkForTransition: '/commutations/brand/kramer',
+      },
+    ],
   },
 ];

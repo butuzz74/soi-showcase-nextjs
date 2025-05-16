@@ -107,6 +107,7 @@ async function ProjectorsMainPage({
             totalProduct={projectors.totalProjectors}
             queryParams={queryParams}
             currentperPage={currentperPage}
+            currentProduct={"projectors"}
           />
           <div>
             <p>

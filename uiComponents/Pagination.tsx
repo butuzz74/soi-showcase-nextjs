@@ -4,13 +4,15 @@ function Pagination({
   currentPage,
   totalPages,
   queryParams, 
-  currentperPage  
+  currentperPage,
+  currentProduct  
 }: {
   totalProduct: number;
   currentPage: number;
   totalPages: number;
   queryParams: string;
-  currentperPage: number | 6
+  currentperPage: number | 6,
+  currentProduct: string
 }) {
   const pages = [];
   for (let i = 1; i <= totalPages; i++) {
@@ -20,13 +22,13 @@ function Pagination({
     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
       <div className="flex flex-1 justify-between sm:hidden">
         <Link
-          href={currentPage === 1 ? "#" : `/projectors?page=${currentPage-1}`+ queryParams}
+          href={currentPage === 1 ? "#" : `/${currentProduct}?page=${currentPage-1}`+ queryParams}
           className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
         >
           Previous
         </Link>
         <Link
-          href={currentPage === 6 ? "#" : `/projectors?page=${currentPage+1}`+ queryParams}
+          href={currentPage === 6 ? "#" : `/${currentProduct}?page=${currentPage+1}`+ queryParams}
           className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
         >
           Next
@@ -50,7 +52,7 @@ function Pagination({
             aria-label="Pagination"
           >
             <Link
-              href={currentPage === 1 ? "#" : `/projectors?page=${currentPage-1}`+ queryParams}
+              href={currentPage === 1 ? "#" : `/${currentProduct}?page=${currentPage-1}`+ queryParams}
               className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
             >
               <span className="sr-only">Previous</span>
@@ -72,7 +74,7 @@ function Pagination({
             {pages.map((elem, index) => (
               <Link
                 key={index}
-                href={elem === 1 ? '#' : `/projectors?page=${elem}`+ queryParams}
+                href={elem === 1 ? '#' : `/${currentProduct}?page=${elem}`+ queryParams}
                 className={
                   elem === currentPage
                     ? 'relative z-10 inline-flex items-center bg-red-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600'
@@ -83,7 +85,7 @@ function Pagination({
               </Link>
             ))}
             <a
-              href={currentPage === 6 ? "#" : `/projectors?page=${currentPage+1}`+ queryParams}
+              href={currentPage === 6 ? "#" : `/${currentProduct}?page=${currentPage+1}`+ queryParams}
               className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
             >
               <span className="sr-only">Next</span>
