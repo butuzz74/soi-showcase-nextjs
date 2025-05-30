@@ -17,7 +17,7 @@ function ContactBar() {
     setVisiblePhone((prevState) => !prevState);
   };
   return (
-    <div className="flex w-full justify-between items-center mt-4">
+    <div className="mt-4 flex w-full items-center justify-between">
       <PhoneNumber action={handleChangeVisiblePhone}>
         {visiblePhone ? (
           <span>A1 +375 29 345-8-543</span>
@@ -59,7 +59,6 @@ function ContactBar() {
         </span>
         <span>info@projectors.by</span>
       </IconForSocial>
-      {/* </SocialLink> */}
     </div>
   );
 }

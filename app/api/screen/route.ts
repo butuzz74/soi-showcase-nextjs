@@ -12,6 +12,7 @@ export async function GET(request: NextRequest) {
   const accessParams = searchParams.get("access");
   const priceFromParams = parseInt(searchParams.get("priceFrom") ?? "0")
   const priceToParams = parseInt(searchParams.get("priceTo") ?? "0")
+  const sortParam = searchParams.get("sort");
   const skip = (page - 1) * perPage;
 
   if (brandParams) {
@@ -32,10 +33,18 @@ export async function GET(request: NextRequest) {
     query.price = { ...(query.price || {}), $lte: priceToParams };
   }
 
+  let sort: any = {};
+  if (sortParam === 'price-asc') {
+    sort.price = 1; 
+  } else if (sortParam === 'price-desc') {
+    sort.price = -1; 
+  }
+
   try {
     await connectDB();
     const screens = await Screen.find(query)
       .select('-__v -createdAt -updated')
+      .sort(sort)
       .skip(skip)
       .limit(perPage);
 
@@ -43,18 +52,18 @@ export async function GET(request: NextRequest) {
 
     if (screens.length === 0) {
       return NextResponse.json({
-        displays: [],
+        products: [],
         totalPages: 0,
         currentPage: page,
-        totalDisplays: 0,
+        totalProducts: 0,
       });
     }
 
     return NextResponse.json({
-      projectors: screens,
+      products: screens,
       totalPages: Math.ceil(totalScreens / perPage),
       currentPage: page,
-      totalProjectors: totalScreens,
+      totalProducts: totalScreens,
     });
   } catch (error) {
     return NextResponse.json({ message: 'Ошибка сервера' }, { status: 500 });
@@ -75,8 +84,8 @@ export async function POST(req: NextRequest) {
         return NextResponse.json(newScreen);
       }
       await connectDB();
-      const newProjector = await Screen.create({ ...body });
-      return NextResponse.json(newProjector);
+      const newScreen = await Screen.create({ ...body });
+      return NextResponse.json(newScreen);
     }
   } catch (error) {
     return NextResponse.json({ message: 'Ошибка сервера' }, { status: 500 });

@@ -23,3 +23,31 @@ export async function GET(
     return NextResponse.json({ message: 'Ошибка сервера' }, { status: 500 });
   }
 }
+
+export async function PATCH(
+  req: Request,
+  { params }: { params: { id: string } }
+) {
+  const { id } = params;
+
+  try {
+    const body = await req.json();
+    await connectDB();
+
+    const updateData = {
+      ...body,
+      ...(body.access !== undefined && {
+        access: body.access === 'true',
+      }),
+    };
+
+    const updatedProjector = await Projector.findByIdAndUpdate(id, updateData, {
+      new: true,
+    });
+
+    return NextResponse.json(updatedProjector);
+  } catch (error) {
+    console.error('PATCH error:', error);
+    return NextResponse.json({ message: 'Ошибка сервера' }, { status: 500 });
+  }
+}

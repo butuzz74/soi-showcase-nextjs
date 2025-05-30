@@ -18,6 +18,7 @@ export async function GET(
   const accessParams = searchParams.get('access');
   const priceFromParams = parseInt(searchParams.get('priceFrom') ?? '0');
   const priceToParams = parseInt(searchParams.get('priceTo') ?? '0');
+  const sortParam = searchParams.get("sort");
   const skip = (page - 1) * perPage;
 
   if (typeParams) {
@@ -34,32 +35,40 @@ export async function GET(
     query.price = { ...(query.price || {}), $lte: priceToParams };
   }
 
+ let sort: any = {};
+  if (sortParam === 'price-asc') {
+    sort.price = 1; 
+  } else if (sortParam === 'price-desc') {
+    sort.price = -1; 
+  } 
+
   try {
     await connectDB();
-    const projectors = await Display.find(query)
+    const displays = await Display.find(query)
       .select('-__v -createdAt -updated')
+      .sort(sort)
       .skip(skip)
       .limit(perPage);
 
-    const totalProjectors = await Display.countDocuments(query);
+    const totalDisplays = await Display.countDocuments(query);
     const brandInfo = await BrandInfo.find({
       brand: { $regex: `^${slug}$`, $options: 'i' },
     }).select('-__v -createdAt -updated');    
 
-    if (projectors.length === 0) {
+    if (displays.length === 0) {
       return NextResponse.json({
-        projectors: [],
+        products: [],
         totalPages: 0,
         currentPage: page,
-        totalProjectors: 0,
+        totalProducts: 0,
       });
     }
 
     return NextResponse.json({
-      projectors,
-      totalPages: Math.ceil(totalProjectors / perPage),
+      products: displays,
+      totalPages: Math.ceil(totalDisplays / perPage),
       currentPage: page,
-      totalProjectors,
+      totalProducts: totalDisplays,
       brandInfo,
     });
   } catch (error) {

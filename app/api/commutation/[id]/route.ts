@@ -24,3 +24,29 @@ export async function GET(
   }
 }
 
+export async function PATCH(
+  req: Request,
+  { params }: { params: { id: string } }
+) {
+  const { id } = params;
+
+  try {
+    const body = await req.json();
+    await connectDB();
+    const updateData = {
+      ...body,
+      ...(body.access !== undefined && {
+        access: body.access === 'true',
+      }),
+    };
+
+    const updatedCommutation = await Commutation.findByIdAndUpdate(id, updateData, {
+      new: true,
+    });
+
+    return NextResponse.json(updatedCommutation);
+  } catch (error) {
+    console.error('PATCH error:', error);
+    return NextResponse.json({ message: 'Ошибка сервера' }, { status: 500 });
+  }
+}

@@ -1,14 +1,15 @@
 import Image from 'next/image';
 import { configForProjectorsPage } from '../../config/configForProjectorsPage';
-import CardForChoiceBrand from './CardForChoiceBrand';
-import ProjectorsBlock from './ProjectorsBlock';
-import { ProjectorsBlockType } from '../../type/types';
+import CardForChoiceBrand from '../CardForChoiceBrand';
+import ProductsBlock from '../ProductsBlock';
+import { ProductsBlockType } from '../../type/types';
 import Breadcrumbs from '../../uiComponents/Breadcums';
 import { configBreadcums } from '../../config/configForBreadcums';
 import Pagination from '../../uiComponents/Pagination';
 import SortingBar from '../SortingBar';
 import SortingSideBar from '../../uiComponents/SortingSideBar';
 import NoticeBlock from '../../uiComponents/NoticeBlock';
+import ButtonAddProduct from '../../uiComponents/ButtonAddProduct';
 
 async function ProjectorsMainPage({
   currentPage,
@@ -19,7 +20,7 @@ async function ProjectorsMainPage({
   currentType,
   currentAccess,
   currentPriceFrom,
-  currentPriceTo
+  currentPriceTo,
 }: {
   currentPage: number;
   currentperPage: number;
@@ -29,19 +30,22 @@ async function ProjectorsMainPage({
   currentType: string;
   currentAccess: boolean;
   currentPriceFrom: string;
-  currentPriceTo: string
+  currentPriceTo: string;
 }) {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/projector?page=${currentPage}&perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&brand=${currentBrand}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`,
     { cache: 'no-store' }
   );
-  const projectors: ProjectorsBlockType = await data.json();
-  const queryParams = `perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&brand=${currentBrand}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`   
+  const projectors: ProductsBlockType = await data.json();
+  const queryParams = `perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&brand=${currentBrand}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`;
 
   return (
     <div className="mt-10 text-black">
-      <div>
+      <div className="flex justify-between">
         <Breadcrumbs data={configBreadcums} />
+        <ButtonAddProduct path="/add/projector">
+          Добавить проектор
+        </ButtonAddProduct>
       </div>
       <div className="flex">
         <Image
@@ -67,7 +71,7 @@ async function ProjectorsMainPage({
         </div>
       </div>
       <div className="w-full p-2 font-semibold text-gray-800">
-        Кол-во товаров: {projectors.totalProjectors}
+        Кол-во товаров: {projectors.totalProducts}
       </div>
       <div className="grid grid-cols-[1fr_5fr] gap-4">
         <div>
@@ -86,10 +90,11 @@ async function ProjectorsMainPage({
           </div>
           <div>
             <SortingBar />
-            {projectors.projectors.length !== 0 ? (
-              <ProjectorsBlock
-                projectors={projectors.projectors}
+            {projectors.products.length !== 0 ? (
+              <ProductsBlock
+                products={projectors.products}
                 layout={currentLayout}
+                currentProduct={'projectors'}
               />
             ) : (
               <NoticeBlock
@@ -104,10 +109,10 @@ async function ProjectorsMainPage({
           <Pagination
             totalPages={projectors.totalPages}
             currentPage={projectors.currentPage}
-            totalProduct={projectors.totalProjectors}
+            totalProduct={projectors.totalProducts}
             queryParams={queryParams}
             currentperPage={currentperPage}
-            currentProduct={"projectors"}
+            currentProduct={'projectors'}
           />
           <div>
             <p>

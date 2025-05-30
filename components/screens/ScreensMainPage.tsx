@@ -1,14 +1,15 @@
 import Image from 'next/image';
 import { configForScreensPage } from '../../config/configForProjectorsPage';
-import CardForChoiceBrand from '../projectors/CardForChoiceBrand';
-import ScreensBlock from '../screens/ScreensBlock';
-import { ProjectorsBlockType } from '../../type/types';
+import CardForChoiceBrand from '../CardForChoiceBrand';
+import ProductsBlock from '../ProductsBlock';
+import { ProductsBlockType } from '../../type/types';
 import Breadcrumbs from '../../uiComponents/Breadcums';
 import { configBreadcumsScreens } from '../../config/configForBreadcums';
 import Pagination from '../../uiComponents/Pagination';
 import SortingBar from '../SortingBar';
 import SortingSideBar from '../../uiComponents/SortingSideBar';
 import NoticeBlock from '../../uiComponents/NoticeBlock';
+import ButtonAddProduct from '../../uiComponents/ButtonAddProduct';
 
 async function ScreensMainPage({
   currentPage,
@@ -35,13 +36,16 @@ async function ScreensMainPage({
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/screen?page=${currentPage}&perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&brand=${currentBrand}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`,
     { cache: 'no-store' }
   );
-  const projectors: ProjectorsBlockType = await data.json();
+  const screens: ProductsBlockType = await data.json();
   const queryParams = `perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&brand=${currentBrand}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`;
 
   return (
     <div className="mt-10 text-black">
-      <div>
+      <div className="flex justify-between" >
         <Breadcrumbs data={configBreadcumsScreens} />
+        <ButtonAddProduct path="/add/screen">
+          Добавить экран
+        </ButtonAddProduct>
       </div>
       <div className="flex">
         <Image
@@ -67,7 +71,7 @@ async function ScreensMainPage({
         </div>
       </div>
       <div className="w-full p-2 font-semibold text-gray-800">
-        Кол-во товаров: {projectors.totalProjectors}
+        Кол-во товаров: {screens.totalProducts}
       </div>
       <div className="grid grid-cols-[1fr_5fr] gap-4">
         <div>
@@ -86,10 +90,11 @@ async function ScreensMainPage({
           </div>
           <div>
             <SortingBar />
-            {projectors.projectors.length !== 0 ? (
-              <ScreensBlock
-                projectors={projectors.projectors}
+            {screens.products.length !== 0 ? (
+              <ProductsBlock
+                products={screens.products}
                 layout={currentLayout}
+                currentProduct={'screens'}
               />
             ) : (
               <NoticeBlock
@@ -102,9 +107,9 @@ async function ScreensMainPage({
             )}
           </div>
           <Pagination
-            totalPages={projectors.totalPages}
-            currentPage={projectors.currentPage}
-            totalProduct={projectors.totalProjectors}
+            totalPages={screens.totalPages}
+            currentPage={screens.currentPage}
+            totalProduct={screens.totalProducts}
             queryParams={queryParams}
             currentperPage={currentperPage}
             currentProduct={'screens'}

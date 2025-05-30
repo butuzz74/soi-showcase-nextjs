@@ -5,49 +5,49 @@ export const configForProjectorsPage: ConfigForProductMainPage[] = [
     title: 'Проекторы OPTOMA',
     image:
       'https://ik.imagekit.io/dku5gkauv/projectors/1714141638557-optoma-ZU860.jpg?updatedAt=1739909394002',
-    linkForTransition: '/projectors',
+    linkForTransition: '/projectors/brand/optoma',
   },
   {
     title: 'Проекторы INFOCUS',
     image:
-      'https://ik.imagekit.io/dku5gkauv/progectorScreen/ScreenForMainPage.jpg?updatedAt=1743167693462',
-    linkForTransition: '/projectors',
+      'https://ik.imagekit.io/dku5gkauv/projectors/SP222.jpg?updatedAt=1739909155067',
+    linkForTransition: '/projectors/brand/infocus',
   },
   {
     title: 'Проекторы LG',
     image:
-      'https://ik.imagekit.io/dku5gkauv/brackets/BracketForMainPage2.jpg?updatedAt=1743169226202',
-    linkForTransition: '/projectors',
+      'https://ik.imagekit.io/dku5gkauv/projectors/LG%20BU70QGA.jfif?updatedAt=1744718516640',
+    linkForTransition: '/projectors/brand/lg',
   },
   {
     title: 'Проекторы SONNOC',
     image:
-      'https://ik.imagekit.io/dku5gkauv/displays/DisplayForMainPage.jfif?updatedAt=1743167815437',
-    linkForTransition: '/projectors',
+      'https://ik.imagekit.io/dku5gkauv/projectors/SONNOC%20SNP-AC551LX.jfif?updatedAt=1744718571661',
+    linkForTransition: '/projectors/brand/sonnoc',
   },
   {
     title: 'Проекторы NEC',
     image:
-      'https://ik.imagekit.io/dku5gkauv/readySolutions/ReadySolutionForMainPage.jfif?updatedAt=1743167937855',
-    linkForTransition: '/projectors',
+      'https://ik.imagekit.io/dku5gkauv/projectors/NEC%20ME383W.jfif?updatedAt=1744718516644',
+    linkForTransition: '/projectors/brand/nec',
   },
   {
     title: 'Проекторы ABIRA',
     image:
-      'https://ik.imagekit.io/dku5gkauv/AVCommutation/AVComForMainPage.jfif?updatedAt=1743167994451',
-    linkForTransition: '/projectors',
+      'https://ik.imagekit.io/dku5gkauv/projectors/ABIRA%20AB-D90ZL.jpg?updatedAt=1744718371431',
+    linkForTransition: '/projectors/brand/abira',
   },
   {
     title: 'Проекторы DIELLO',
     image:
-      'https://ik.imagekit.io/dku5gkauv/AVCommutation/AVComForMainPage.jfif?updatedAt=1743167994451',
-    linkForTransition: '/projectors',
+      'https://ik.imagekit.io/dku5gkauv/projectors/DIELLO%20DL-HTW5.jfif?updatedAt=1744718438081',
+    linkForTransition: '/projectors/brand/diello',
   },
   {
     title: 'Проекторы EPSON',
     image:
-      'https://ik.imagekit.io/dku5gkauv/AVCommutation/AVComForMainPage.jfif?updatedAt=1743167994451',
-    linkForTransition: '/projectors',
+      'https://ik.imagekit.io/dku5gkauv/projectors/EPSON%20EB-W41.jfif?updatedAt=1744718441679',
+    linkForTransition: '/projectors/brand/epson',
   },
   {
     title: 'Аксессуары для проектора',

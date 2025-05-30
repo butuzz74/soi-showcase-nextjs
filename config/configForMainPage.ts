@@ -11,7 +11,7 @@ export const productConfigForMainPage: ConfigForProductMainPage[] = [
     title: 'Экраны для проекторов',
     image:
       'https://ik.imagekit.io/dku5gkauv/progectorScreen/ScreenForMainPage.jpg?updatedAt=1743167693462',
-    linkForTransition: '/projectors',
+    linkForTransition: '/screens',
   },
   {
     title: 'Кронштейны и крепления',

@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import CommutationsBlock from './CommutationsBlock';
-import { ProjectorsBlockType } from '../../type/types';
+import ProductsBlock from '../ProductsBlock';
+import { ProductsBlockType } from '../../type/types';
 import Breadcrumbs from '../../uiComponents/Breadcums';
 import { configBreadcumsCommutations } from '../../config/configForBreadcums';
 import Pagination from '../../uiComponents/Pagination';
@@ -8,7 +8,6 @@ import SortingBar from '../SortingBar';
 import SortingSideBar from '../../uiComponents/SortingSideBar';
 import NoticeBlock from '../../uiComponents/NoticeBlock';
 import Markdown from 'react-markdown';
-import ButtonAddProduct from '../../uiComponents/ButtonAddProduct';
 
 async function CommutationBrandPage({
   currentPage,
@@ -35,16 +34,13 @@ async function CommutationBrandPage({
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/commutation/brand/${currentBrand}?page=${currentPage}&perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`,
     { cache: 'no-store' }
   );
-  const projectors: ProjectorsBlockType = await data.json();
+  const commutations: ProductsBlockType = await data.json();
   const queryParams = `perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`;
 
   return (
     <div className="mt-10 text-black">
       <div className="flex justify-between">
-        <Breadcrumbs data={configBreadcumsCommutations} />
-        <ButtonAddProduct path="/add/projector">
-          Добавить оборудование
-        </ButtonAddProduct>
+        <Breadcrumbs data={configBreadcumsCommutations} />        
       </div>
       <div className="flex">
         <Image
@@ -57,15 +53,15 @@ async function CommutationBrandPage({
         />
         <div className="prose ml-4 flex flex-col">
           <h1>Коммутационное оборудование {currentBrand}</h1>
-          {projectors.brandInfo[0].descriptionTop && (
+          {commutations.brandInfo[0].descriptionTop && (
             <Markdown>
-              {projectors.brandInfo[0].descriptionTop.replace(/\\n/g, '\n')}
+              {commutations.brandInfo[0].descriptionTop.replace(/\\n/g, '\n')}
             </Markdown>
           )}
         </div>
       </div>
       <div className="w-full p-2 font-semibold text-gray-800">
-        Кол-во товаров: {projectors.totalProjectors}
+        Кол-во товаров: {commutations.totalProducts}
       </div>
       <div className="grid grid-cols-[1fr_5fr] gap-4">
         <div>
@@ -74,10 +70,11 @@ async function CommutationBrandPage({
         <div className="grid grid-rows-[auto_auto_1fr] gap-4">
           <div>
             <SortingBar />
-            {projectors.projectors.length !== 0 ? (
-              <CommutationsBlock
-                projectors={projectors.projectors}
+            {commutations.products.length !== 0 ? (
+              <ProductsBlock
+                products={commutations.products}
                 layout={currentLayout}
+                currentProduct={"commutations"}
               />
             ) : (
               <NoticeBlock
@@ -90,17 +87,18 @@ async function CommutationBrandPage({
             )}
           </div>
           <Pagination
-            totalPages={projectors.totalPages}
-            currentPage={projectors.currentPage}
-            totalProduct={projectors.totalProjectors}
+            totalPages={commutations.totalPages}
+            currentPage={commutations.currentPage}
+            totalProduct={commutations.totalProducts}
             queryParams={queryParams}
             currentperPage={currentperPage}
             currentProduct={'commutations'}
+            currentBrand={currentBrand.toLowerCase()}
           />
           <div className="prose">
-            {projectors.brandInfo[0].descriptionBottom && (
+            {commutations.brandInfo[0].descriptionBottom && (
               <Markdown>
-                {projectors.brandInfo[0].descriptionBottom.replace(
+                {commutations.brandInfo[0].descriptionBottom.replace(
                   /\\n/g,
                   '\n'
                 )}

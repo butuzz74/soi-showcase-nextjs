@@ -9,9 +9,9 @@ function SortingBar() {
   const searchParams = useSearchParams();
 
   const [layout, setLayout] = useState(searchParams.get('layout') || 'grid');
-  const [sort, setSort] = useState(searchParams.get('sort') || '');
+  const [sort, setSort] = useState(searchParams.get('sort') || 'no');
   const [perPage, setPerPage] = useState(searchParams.get('perPage') || '6');
-
+  
   const updateParams = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set(key, value);
@@ -72,10 +72,9 @@ function SortingBar() {
         }}
         className="rounded border px-3 py-2 hover:cursor-pointer"
       >
-        <option value="">Без сортировки</option>
+        <option value="no">Без сортировки</option>
         <option value="price-asc">Сначала дешевые</option>
-        <option value="price-desc">Сначала дорогие</option>
-        <option value="newest">Сначала новые</option>
+        <option value="price-desc">Сначала дорогие</option>        
       </select>
     </div>
   );

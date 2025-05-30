@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import ScreensBlock from './ScreensBlock';
-import { ProjectorsBlockType } from '../../type/types';
+import ProductsBlock from '../ProductsBlock';
+import { ProductsBlockType } from '../../type/types';
 import Breadcrumbs from '../../uiComponents/Breadcums';
 import { configBreadcumsScreens } from '../../config/configForBreadcums';
 import Pagination from '../../uiComponents/Pagination';
@@ -8,7 +8,6 @@ import SortingBar from '../SortingBar';
 import SortingSideBar from '../../uiComponents/SortingSideBar';
 import NoticeBlock from '../../uiComponents/NoticeBlock';
 import Markdown from 'react-markdown';
-import ButtonAddProduct from '../../uiComponents/ButtonAddProduct';
 
 async function ScreenBrandPage({
   currentPage,
@@ -35,16 +34,13 @@ async function ScreenBrandPage({
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/screen/brand/${currentBrand}?page=${currentPage}&perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`,
     { cache: 'no-store' }
   );
-  const projectors: ProjectorsBlockType = await data.json();
+  const screens: ProductsBlockType = await data.json();
   const queryParams = `perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`;
 
   return (
     <div className="mt-10 text-black">
       <div className="flex justify-between">
-        <Breadcrumbs data={configBreadcumsScreens} />
-        <ButtonAddProduct path="/add/projector">
-          Добавить экран
-        </ButtonAddProduct>
+        <Breadcrumbs data={configBreadcumsScreens} />        
       </div>
       <div className="flex">
         <Image
@@ -57,15 +53,15 @@ async function ScreenBrandPage({
         />
         <div className="prose ml-4 flex flex-col">
           <h1>Проекционные экраны {currentBrand}</h1>
-          {projectors.brandInfo[0].descriptionTop && (
+          {screens.brandInfo[0].descriptionTop && (
             <Markdown>
-              {projectors.brandInfo[0].descriptionTop.replace(/\\n/g, '\n')}
+              {screens.brandInfo[0].descriptionTop.replace(/\\n/g, '\n')}
             </Markdown>
           )}
         </div>
       </div>
       <div className="w-full p-2 font-semibold text-gray-800">
-        Кол-во товаров: {projectors.totalProjectors}
+        Кол-во товаров: {screens.totalProducts}
       </div>
       <div className="grid grid-cols-[1fr_5fr] gap-4">
         <div>
@@ -74,10 +70,11 @@ async function ScreenBrandPage({
         <div className="grid grid-rows-[auto_auto_1fr] gap-4">
           <div>
             <SortingBar />
-            {projectors.projectors.length !== 0 ? (
-              <ScreensBlock
-                projectors={projectors.projectors}
+            {screens.products.length !== 0 ? (
+              <ProductsBlock
+                products={screens.products}
                 layout={currentLayout}
+                currentProduct={"screens"}
               />
             ) : (
               <NoticeBlock
@@ -90,17 +87,18 @@ async function ScreenBrandPage({
             )}
           </div>
           <Pagination
-            totalPages={projectors.totalPages}
-            currentPage={projectors.currentPage}
-            totalProduct={projectors.totalProjectors}
+            totalPages={screens.totalPages}
+            currentPage={screens.currentPage}
+            totalProduct={screens.totalProducts}
             queryParams={queryParams}
             currentperPage={currentperPage}
             currentProduct={"screens"}
+            currentBrand={currentBrand.toLowerCase()}
           />
           <div className="prose">
-            {projectors.brandInfo[0].descriptionBottom && (
+            {screens.brandInfo[0].descriptionBottom && (
               <Markdown>
-                {projectors.brandInfo[0].descriptionBottom.replace(
+                {screens.brandInfo[0].descriptionBottom.replace(
                   /\\n/g,
                   '\n'
                 )}

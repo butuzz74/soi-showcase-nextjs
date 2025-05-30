@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import DisplaysBlock from './DisplaysBlock';
-import { ProjectorsBlockType } from '../../type/types';
+import ProductsBlock from '../ProductsBlock';
+import { ProductsBlockType } from '../../type/types';
 import Breadcrumbs from '../../uiComponents/Breadcums';
 import { configBreadcumsDisplays } from '../../config/configForBreadcums';
 import Pagination from '../../uiComponents/Pagination';
@@ -8,7 +8,6 @@ import SortingBar from '../SortingBar';
 import SortingSideBar from '../../uiComponents/SortingSideBar';
 import NoticeBlock from '../../uiComponents/NoticeBlock';
 import Markdown from 'react-markdown';
-import ButtonAddProduct from '../../uiComponents/ButtonAddProduct';
 
 async function DisplaysBrandPage({
   currentPage,
@@ -35,16 +34,13 @@ async function DisplaysBrandPage({
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/display/brand/${currentBrand}?page=${currentPage}&perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`,
     { cache: 'no-store' }
   );
-  const projectors: ProjectorsBlockType = await data.json();
+  const displays: ProductsBlockType = await data.json();
   const queryParams = `perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`;
 
   return (
     <div className="mt-10 text-black">
       <div className="flex justify-between">
-        <Breadcrumbs data={configBreadcumsDisplays} />
-        <ButtonAddProduct path="/add/projector">
-          Добавить монитор
-        </ButtonAddProduct>
+        <Breadcrumbs data={configBreadcumsDisplays} />        
       </div>
       <div className="flex">
         <Image
@@ -57,15 +53,15 @@ async function DisplaysBrandPage({
         />
         <div className="prose ml-4 flex flex-col">
           <h1>Проекторы {currentBrand}</h1>
-          {projectors.brandInfo[0].descriptionTop && (
+          {displays.brandInfo[0].descriptionTop && (
             <Markdown>
-              {projectors.brandInfo[0].descriptionTop.replace(/\\n/g, '\n')}
+              {displays.brandInfo[0].descriptionTop.replace(/\\n/g, '\n')}
             </Markdown>
           )}
         </div>
       </div>
       <div className="w-full p-2 font-semibold text-gray-800">
-        Кол-во товаров: {projectors.totalProjectors}
+        Кол-во товаров: {displays.totalProducts}
       </div>
       <div className="grid grid-cols-[1fr_5fr] gap-4">
         <div>
@@ -74,10 +70,11 @@ async function DisplaysBrandPage({
         <div className="grid grid-rows-[auto_auto_1fr] gap-4">
           <div>
             <SortingBar />
-            {projectors.projectors.length !== 0 ? (
-              <DisplaysBlock
-                projectors={projectors.projectors}
+            {displays.products.length !== 0 ? (
+              <ProductsBlock
+                products={displays.products}
                 layout={currentLayout}
+                currentProduct={"displays"}
               />
             ) : (
               <NoticeBlock
@@ -90,17 +87,18 @@ async function DisplaysBrandPage({
             )}
           </div>
           <Pagination
-            totalPages={projectors.totalPages}
-            currentPage={projectors.currentPage}
-            totalProduct={projectors.totalProjectors}
+            totalPages={displays.totalPages}
+            currentPage={displays.currentPage}
+            totalProduct={displays.totalProducts}
             queryParams={queryParams}
             currentperPage={currentperPage}
             currentProduct={"displays"}
+            currentBrand={currentBrand.toLowerCase()}
           />
           <div className="prose">
-            {projectors.brandInfo[0].descriptionBottom && (
+            {displays.brandInfo[0].descriptionBottom && (
               <Markdown>
-                {projectors.brandInfo[0].descriptionBottom.replace(
+                {displays.brandInfo[0].descriptionBottom.replace(
                   /\\n/g,
                   '\n'
                 )}

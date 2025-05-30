@@ -1,39 +1,29 @@
+'use client';
 import Link from 'next/link';
 function Pagination({
   totalProduct,
   currentPage,
   totalPages,
-  queryParams, 
+  queryParams,
   currentperPage,
-  currentProduct  
+  currentProduct,
+  currentBrand,
 }: {
   totalProduct: number;
   currentPage: number;
   totalPages: number;
   queryParams: string;
-  currentperPage: number | 6,
-  currentProduct: string
+  currentperPage: number | 6;
+  currentProduct: string;
+  currentBrand?: string;
 }) {
   const pages = [];
   for (let i = 1; i <= totalPages; i++) {
     pages.push(i);
   }
+
   return (
     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
-      <div className="flex flex-1 justify-between sm:hidden">
-        <Link
-          href={currentPage === 1 ? "#" : `/${currentProduct}?page=${currentPage-1}`+ queryParams}
-          className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-        >
-          Previous
-        </Link>
-        <Link
-          href={currentPage === 6 ? "#" : `/${currentProduct}?page=${currentPage+1}`+ queryParams}
-          className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-        >
-          Next
-        </Link>
-      </div>
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
@@ -52,8 +42,26 @@ function Pagination({
             aria-label="Pagination"
           >
             <Link
-              href={currentPage === 1 ? "#" : `/${currentProduct}?page=${currentPage-1}`+ queryParams}
-              className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+              href={
+                currentPage === 1
+                  ? ''
+                  : currentBrand
+                    ? `/${currentProduct}/brand/${currentBrand}?page=${currentPage - 1}&` +
+                      queryParams
+                    : `/${currentProduct}?page=${currentPage - 1}&` +
+                      queryParams
+              }
+              onClick={(e) => {
+                if (currentPage === 1) {
+                  e.preventDefault();
+                }
+              }}
+              aria-disabled={currentPage === 1}
+              className={`relative inline-flex items-center rounded-l-md px-2 py-2 ring-1 ring-gray-300 ring-inset focus:z-20 focus:outline-offset-0 ${
+                currentPage === 1
+                  ? 'cursor-not-allowed bg-gray-100 text-gray-300'
+                  : 'text-gray-400 hover:bg-gray-50'
+              } `}
             >
               <span className="sr-only">Previous</span>
               <svg
@@ -74,7 +82,19 @@ function Pagination({
             {pages.map((elem, index) => (
               <Link
                 key={index}
-                href={elem === 1 ? '#' : `/${currentProduct}?page=${elem}`+ queryParams}
+                href={
+                  elem === currentPage
+                    ? ''
+                    : currentBrand
+                      ? `/${currentProduct}/brand/${currentBrand}?page=${elem}&` +
+                        queryParams
+                      : `/${currentProduct}?page=${elem}&` + queryParams
+                }
+                onClick={(e) => {
+                  if (elem === currentPage) {
+                    e.preventDefault();
+                  }
+                }}
                 className={
                   elem === currentPage
                     ? 'relative z-10 inline-flex items-center bg-red-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600'
@@ -84,9 +104,27 @@ function Pagination({
                 {elem}
               </Link>
             ))}
-            <a
-              href={currentPage === 6 ? "#" : `/${currentProduct}?page=${currentPage+1}`+ queryParams}
-              className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+            <Link
+              href={
+                currentPage >= totalPages
+                  ? ''
+                  : currentBrand
+                    ? `/${currentProduct}/brand/${currentBrand}?page=${currentPage + 1}&` +
+                      queryParams
+                    : `/${currentProduct}?page=${currentPage + 1}&` +
+                      queryParams
+              }
+              onClick={(e) => {
+                if (currentPage >= totalPages) {
+                  e.preventDefault();
+                }
+              }}
+              aria-disabled={currentPage >= totalPages}
+              className={`relative inline-flex items-center rounded-l-md px-2 py-2 ring-1 ring-gray-300 ring-inset focus:z-20 focus:outline-offset-0 ${
+                currentPage >= totalPages
+                  ? 'cursor-not-allowed bg-gray-100 text-gray-300'
+                  : 'text-gray-400 hover:bg-gray-50'
+              } `}
             >
               <span className="sr-only">Next</span>
               <svg
@@ -102,7 +140,7 @@ function Pagination({
                   clipRule="evenodd"
                 />
               </svg>
-            </a>
+            </Link>
           </nav>
         </div>
       </div>

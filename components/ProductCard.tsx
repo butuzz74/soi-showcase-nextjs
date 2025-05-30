@@ -1,8 +1,12 @@
-import { ProjectorCardProps } from '../type/types';
+import { ProductCardType } from '../type/types';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const CommutationCard: React.FC<ProjectorCardProps> = ({
+type ProductCardProps = {
+  currentProduct: string
+} & ProductCardType
+
+const ProductCard: React.FC<ProductCardProps> = ({
   id,
   image,
   access,
@@ -11,10 +15,11 @@ const CommutationCard: React.FC<ProjectorCardProps> = ({
   price,
   model,
   brand,
+  currentProduct
 }) => {
   const lengthDescription = description.length;
   return (
-    <Link href={`/commutations/${id}`} passHref>
+    <Link href={`/${currentProduct}/${id}`} passHref>
       <div className="mx-auto flex h-full max-w-sm flex-col justify-between rounded-lg border border-gray-200 bg-white shadow-lg">
         <Image
           src={image}
@@ -57,6 +62,4 @@ const CommutationCard: React.FC<ProjectorCardProps> = ({
   );
 };
 
-export default CommutationCard;
-
-
+export default ProductCard;

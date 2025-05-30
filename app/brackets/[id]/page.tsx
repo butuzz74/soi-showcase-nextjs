@@ -1,6 +1,6 @@
 import NavigationButton from '../../../components/Button';
-import ProjectorCardOne from '../../../components/ProjectorCardOne';
-import { ProjectorType } from '../../../type/types';
+import ProductCardOne from '../../../components/ProductCardOne';
+import { ProductType } from '../../../type/types';
 import { Metadata } from 'next';
 import { auth } from '../../../config/auth';
 
@@ -14,7 +14,7 @@ export async function generateMetadata({
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/bracket/${id}`,
     { cache: 'no-store' }
   );
-  const display: ProjectorType = await data.json();
+  const display: ProductType = await data.json();
   if (!display) {
     return {
       title: 'Bracket Not Found',
@@ -35,22 +35,27 @@ async function BracketPage({ params }: { params: Promise<{ id: string }> }) {
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/bracket/${id}`,
     { cache: 'no-store' }
   );
-  const display: ProjectorType = await data.json();
+  const display: ProductType = await data.json();
 
   return (
-    <div className="mx-auto flex h-full w-full flex-col justify-between rounded-lg border border-gray-200 bg-white shadow-lg items-center my-8">
-      <ProjectorCardOne
-        id={display?._id!}
-        image={display?.image!}
-        price={display?.price!}
-        model={display?.model!}
-        type={display?.type!}
-        brand={display?.brand!}
-        access={display?.access!}
-        description={display?.description!}
+    <div className="mx-auto my-8 flex h-full w-full flex-col items-center justify-between rounded-lg border border-gray-200 bg-white shadow-lg">
+      <ProductCardOne
+        id={display?._id}
+        image={display?.image}
+        price={display?.price}
+        model={display?.model}
+        type={display?.type}
+        brand={display?.brand}
+        access={display?.access}
+        description={display?.description}
       />
-      <div className="flex justify-center mb-8">
-        {session ? <NavigationButton text="Редактировать" back={true} /> : null}
+      <div className="mb-8 flex justify-center">
+        {session ? (
+          <NavigationButton
+            text="Редактировать"
+            customAction={`/edit?currentProduct=bracket&id=${display._id}`}
+          />
+        ) : null}
         <NavigationButton text="Назад" back={true} />
       </div>
     </div>

@@ -1,14 +1,13 @@
 import Image from 'next/image';
-import { configForBracketsPage } from '../../config/configForProjectorsPage';
-//import CardForChoiceBrand from '../projectors/CardForChoiceBrand';
-import SetsBlock from '../sets/SetsBlock';
-import { ProjectorsBlockType } from '../../type/types';
+import ProductsBlock from '../ProductsBlock';
+import { ProductsBlockType } from '../../type/types';
 import Breadcrumbs from '../../uiComponents/Breadcums';
 import { configBreadcumsSets } from '../../config/configForBreadcums';
 import Pagination from '../../uiComponents/Pagination';
 import SortingBar from '../SortingBar';
 import SortingSideBar from '../../uiComponents/SortingSideBar';
 import NoticeBlock from '../../uiComponents/NoticeBlock';
+import ButtonAddProduct from '../../uiComponents/ButtonAddProduct';
 
 async function SetsMainPage({
   currentPage,
@@ -35,13 +34,16 @@ async function SetsMainPage({
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/set?page=${currentPage}&perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&brand=${currentBrand}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`,
     { cache: 'no-store' }
   );
-  const projectors: ProjectorsBlockType = await data.json();
+  const sets: ProductsBlockType = await data.json();
   const queryParams = `perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&brand=${currentBrand}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`;
 
   return (
     <div className="mt-10 text-black">
-      <div>
+      <div className='flex justify-between'>
         <Breadcrumbs data={configBreadcumsSets} />
+        <ButtonAddProduct path="/add/set">
+          Добавить набор
+        </ButtonAddProduct>
       </div>
       <div className="flex">
         <Image
@@ -74,7 +76,7 @@ async function SetsMainPage({
         </div>
       </div>
       <div className="w-full p-2 font-semibold text-gray-800">
-        Кол-во товаров: {projectors.totalProjectors}
+        Кол-во товаров: {sets.totalProducts}
       </div>
       <div className="grid grid-cols-[1fr_5fr] gap-4">
         <div>
@@ -83,10 +85,11 @@ async function SetsMainPage({
         <div className="grid grid-rows-[auto_auto_1fr] gap-4">
           <div>
             <SortingBar />
-            {projectors.projectors.length !== 0 ? (
-              <SetsBlock
-                projectors={projectors.projectors}
+            {sets.products.length !== 0 ? (
+              <ProductsBlock
+                products={sets.products}
                 layout={currentLayout}
+                currentProduct={"sets"}
               />
             ) : (
               <NoticeBlock
@@ -99,9 +102,9 @@ async function SetsMainPage({
             )}
           </div>
           <Pagination
-            totalPages={projectors.totalPages}
-            currentPage={projectors.currentPage}
-            totalProduct={projectors.totalProjectors}
+            totalPages={sets.totalPages}
+            currentPage={sets.currentPage}
+            totalProduct={sets.totalProducts}
             queryParams={queryParams}
             currentperPage={currentperPage}
             currentProduct={'sets'}

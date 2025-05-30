@@ -1,14 +1,15 @@
 import Image from 'next/image';
 import { configForCommutationsPage } from '../../config/configForProjectorsPage';
-import CardForChoiceBrand from '../projectors/CardForChoiceBrand';
-import CommutationsBlock from '../commutations/CommutationsBlock';
-import { ProjectorsBlockType } from '../../type/types';
+import CardForChoiceBrand from '../CardForChoiceBrand';
+import ProductsBlock from '../ProductsBlock';
+import { ProductsBlockType } from '../../type/types';
 import Breadcrumbs from '../../uiComponents/Breadcums';
 import { configBreadcumsCommutations } from '../../config/configForBreadcums';
 import Pagination from '../../uiComponents/Pagination';
 import SortingBar from '../SortingBar';
 import SortingSideBar from '../../uiComponents/SortingSideBar';
 import NoticeBlock from '../../uiComponents/NoticeBlock';
+import ButtonAddProduct from '../../uiComponents/ButtonAddProduct';
 
 async function CommutationsMainPage({
   currentPage,
@@ -35,18 +36,21 @@ async function CommutationsMainPage({
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/commutation?page=${currentPage}&perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&brand=${currentBrand}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`,
     { cache: 'no-store' }
   );
-  const projectors: ProjectorsBlockType = await data.json();
+  const commutations: ProductsBlockType = await data.json();
   const queryParams = `perPage=${currentperPage}&layout=${currentLayout}&sort=${currentSort}&brand=${currentBrand}&type=${currentType}&access=${currentAccess}&priceFrom=${currentPriceFrom}&priceTo=${currentPriceTo}`;
 
   return (
     <div className="mt-10 text-black">
-      <div>
+      <div className="flex justify-between">
         <Breadcrumbs data={configBreadcumsCommutations} />
+        <ButtonAddProduct path="/add/commutation">
+          Добавить оборудование
+        </ButtonAddProduct>
       </div>
       <div className="flex">
         <Image
           src={
-            'https://ik.imagekit.io/dku5gkauv/brackets/BracketForMainPage2.jpg?updatedAt=1743169226202'
+            'https://ik.imagekit.io/dku5gkauv/AVCommutation/AVComForMainPage.jfif?updatedAt=1743167994451'
           }
           alt="image"
           width={200}
@@ -70,7 +74,7 @@ async function CommutationsMainPage({
         </div>
       </div>
       <div className="w-full p-2 font-semibold text-gray-800">
-        Кол-во товаров: {projectors.totalProjectors}
+        Кол-во товаров: {commutations.totalProducts}
       </div>
       <div className="grid grid-cols-[1fr_5fr] gap-4">
         <div>
@@ -89,10 +93,11 @@ async function CommutationsMainPage({
           </div>
           <div>
             <SortingBar />
-            {projectors.projectors.length !== 0 ? (
-              <CommutationsBlock
-                projectors={projectors.projectors}
+            {commutations.products.length !== 0 ? (
+              <ProductsBlock
+                products={commutations.products}
                 layout={currentLayout}
+                currentProduct={'commutations'}
               />
             ) : (
               <NoticeBlock
@@ -105,9 +110,9 @@ async function CommutationsMainPage({
             )}
           </div>
           <Pagination
-            totalPages={projectors.totalPages}
-            currentPage={projectors.currentPage}
-            totalProduct={projectors.totalProjectors}
+            totalPages={commutations.totalPages}
+            currentPage={commutations.currentPage}
+            totalProduct={commutations.totalProducts}
             queryParams={queryParams}
             currentperPage={currentperPage}
             currentProduct={'commutations'}

@@ -16,7 +16,7 @@ const NavigationButton = ({
     } else if (back) {
       router.back();
     } else if (customAction) {
-      customAction();
+      router.push(`${customAction}`);
     }
   };
 

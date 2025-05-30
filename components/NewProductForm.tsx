@@ -42,29 +42,7 @@ const NewProductForm = ({ action, data }: ServerAction) => {
             </div>
           ))}
         </>
-      ) : null}
-
-      {/* {data ? (
-        <>
-          {data.map((elem, index) => (
-            <div key={index} className="flex flex-col">
-              <label
-                htmlFor={elem.name}
-                className="font-medium text-white capitalize"
-              >
-                {elem.label}
-              </label>
-              <input
-                type={elem.type === "checkbox" ? "checkbox" : "text"}
-                name={elem.name}
-                id={elem.name}
-                className="rounded-md border border-gray-300 p-2 text-white"
-                defaultChecked={elem.type === "checkbox" ? false: undefined}
-              />
-            </div>
-          ))}
-        </>
-      ) : null} */}
+      ) : null}      
       <button
         type="submit"
         className="w-full rounded-md bg-blue-400 p-2 text-white hover:bg-blue-300"

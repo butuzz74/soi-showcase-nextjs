@@ -1,23 +1,6 @@
 import { Metadata } from 'next';
 import BracketBrandPage from '../../../../components/brackets/BracketBrandPage';
-
-type Props = {
-  searchParams: Promise<{
-    page?: string;
-    perPage?: '6' | '12' | '24';
-    layout?: 'grid' | 'list';
-    sort?: 'price-asc' | 'price-desc' | 'newest';
-    keyword?: string;
-    priceFrom?: string;
-    priceTo?: string;
-    access?: boolean;
-    onSale?: boolean;    
-    type?: string;
-    brightness?: string;       
-  }>;
-  params: Promise<{slug: string}>
-
-};
+import { BrandPageProps } from '../../../../type/types';
 
 export async function generateMetadata({
   params,
@@ -30,7 +13,7 @@ export async function generateMetadata({
   };
 }
 
-async function BracketBrand({searchParams, params}: Props) {  
+async function BracketBrand({searchParams, params}: BrandPageProps) {  
   const {
     page,
     perPage,

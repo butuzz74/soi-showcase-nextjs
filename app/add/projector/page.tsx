@@ -1,7 +1,7 @@
 import NewProductForm from '../../../components/NewProductForm';
 import { catalogConfig } from '../../../config/configFormProduct';
 import { redirect } from 'next/navigation';
-import { ProjectorType } from '../../../type/types';
+import { ProductType } from '../../../type/types';
 async function createProduct(data: FormData) {
   'use server';
   const obj = Object.fromEntries(data); 
@@ -18,7 +18,7 @@ async function createProduct(data: FormData) {
       cache: 'no-store',
     }
   ); 
-  const res : ProjectorType = await newProjector.json()
+  const res : ProductType = await newProjector.json()
   redirect(`/projectors/${res._id}`) 
 }
 

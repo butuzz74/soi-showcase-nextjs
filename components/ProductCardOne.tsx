@@ -1,7 +1,7 @@
-import { ProjectorCardProps } from '../type/types';
+import { ProductCardType } from '../type/types';
 import Image from 'next/image';
 
-const ProjectorCard: React.FC<ProjectorCardProps> = ({
+const ProductCardOne: React.FC<ProductCardType> = ({
   id,
   image,
   access,
@@ -47,4 +47,4 @@ const ProjectorCard: React.FC<ProjectorCardProps> = ({
   );
 };
 
-export default ProjectorCard;
+export default ProductCardOne;

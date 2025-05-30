@@ -1,29 +1,12 @@
 import { Metadata } from 'next';
 import ScreensMainPage from '../../components/screens/ScreensMainPage';
+import { MainPageProps } from '../../type/types';
 
-type Props = {
-  searchParams: Promise<{
-    page?: string;
-    perPage?: '6' | '12' | '24';
-    layout?: 'grid' | 'list';
-    sort?: 'price-asc' | 'price-desc' | 'newest';
-    keyword?: string;
-    priceFrom?: string;
-    priceTo?: string;
-    access?: boolean;
-    onSale?: boolean;
-    brand?: string;
-    type?: string;
-    brightness?: string;
-  }>;
-};
-
-type SearchParams = Promise<{ page?: string }>;
 export const metadata: Metadata = {
   title: 'SOI-Screens',
 };
 
-async function ScreensAll({ searchParams }: Props) {
+async function ScreensAll({ searchParams }: MainPageProps) {
   const {
     page,
     perPage,
