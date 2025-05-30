@@ -1,4 +1,3 @@
-import NavLinks from '../components/NavLinks';
 import { productConfigForMainPage } from '../config/configForMainPage';
 import ProductCardForMainPage from '../components/ProductCardForMainPage';
 export default function MainPage() {
